@@ -38,6 +38,45 @@ p {
 }
 
 
+/* Location List */
+.location-list {
+    position: relative;
+    width: 600px;
+    height: 800px;
+    background-color: #2d3436;
+    padding: 60px;
+    border-radius: 15px;
+    z-index: 10;
+}
+
+
+.location-list-content {
+    padding: 10px 20px 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+
+.location-list-content div>p {
+    padding: 0px 15px 0px 5px;
+}
+
+.location-list-content img {
+    display: block;
+    margin: auto;
+    width: 15%;
+    border-radius: 50%;
+}
+
+
+.run-color {
+    background-color: #d1ccc0;
+}
+
+.bike-color {
+    background-color: #CAD3C8;
+}
+
 /* map */
 #map {
     width: 100%;
