@@ -12,12 +12,19 @@ body {
     background-color: #212529;
 }
 
+/* a class for hide any element i want */
+.hidden {
+    display: none;
+}
+
 /* this class is for information boxes for how to use app sections */
 .info-box {
     max-width: 900px;
     background-color: #f5f4f1;
     padding: 100px;
     border-radius: 15px;
+    position: relative;
+    z-index: 10;
 }
 
 .info-content h3 {
@@ -28,4 +35,16 @@ body {
 p {
     color: #212529;
     font-weight: 600;
+}
+
+
+/* map */
+#map {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
 }
