@@ -41,16 +41,17 @@ p {
 /* Location List */
 .location-list {
     position: relative;
-    width: 600px;
+    width: 550px;
     height: 800px;
     background-color: #2d3436;
-    padding: 60px;
+    padding: 40px;
     border-radius: 15px;
     z-index: 10;
 }
 
 
 .location-list-content {
+    cursor: pointer;
     padding: 10px 20px 10px 20px;
     border-radius: 8px;
     margin-bottom: 30px;
