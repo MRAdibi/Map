@@ -35,7 +35,10 @@ const startApp = function () {
                     }).setContent("Hello World"))
                     .openPopup();
             })
-        }, function () { })
+        },
+            function () {
+                alert("can't find you location")
+            })
     }
 }
 ///////////////// end call API ///////////////// 
