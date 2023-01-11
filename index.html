@@ -26,40 +26,48 @@
         <div class="d-flex justify-content-start mx-5">
             <div class="location-list overflow-auto">
                 <!-- in this section we can add location -->
-                <div class="add-location location-selection">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="d-flex justify-content-around">
-                                <p class="m-auto">Type :</p>
-                                <select class="form-select w-50" aria-label="Default select example">
-                                    <option selected>Select option</option>
-                                    <option value="1">Running</option>
-                                    <option value="2">cycling</option>
-                                </select>
+                <form>
+                    <div class="add-location add-location-hidden">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="m-auto">Type :</p>
+                                    <select class="form-select w-50 type" aria-label="Default select example">
+                                        <option value="1">Running</option>
+                                        <option value="2">cycling</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="distance col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="m-auto">Distance :</p>
+                                    <input class="w-50" type="text" placeholder="km">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="d-flex justify-content-around">
-                                <p class="m-auto">Distance :</p>
-                                <input class="w-50" type="text" placeholder="km">
+                        <div class="row mt-2">
+                            <div class="duration col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="m-auto">Duration :</p>
+                                    <input class="w-50" type="text" placeholder="min">
+                                </div>
+                            </div>
+                            <div class="cadence col-6">
+                                <div class="d-flex justify-content-around">
+                                    <p class="m-auto">Cadence :</p>
+                                    <input class="w-50" type="text" placeholder="step/min">
+                                </div>
+                            </div>
+                            <div class="elevation col-6 hidden">
+                                <div class="d-flex justify-content-around">
+                                    <p class="m-auto">Elevation :</p>
+                                    <input class="w-50" type="text" placeholder="meters">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-6">
-                            <div class="d-flex justify-content-around">
-                                <p class="m-auto">Duration :</p>
-                                <input class="w-50" type="text" placeholder="min">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="d-flex justify-content-around">
-                                <p class="m-auto">Cadence :</p>
-                                <input class="w-50" type="text" placeholder="step/min">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <button class="add-location-btn">OK</button>
+                </form>
                 <!-- add location end -->
                 <div class="d-flex flex-column location-list-content run-color text-center">
                     <div class="d-flex justify-content-around">
