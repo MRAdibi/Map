@@ -1,3 +1,8 @@
+
+
+
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 ///////////// here is for call elements from DOM or create the variables we need
 const infoBoxes = document.querySelectorAll('.tutorial')
 const startBtn = document.querySelector('.start-map-section')
@@ -11,6 +16,57 @@ const inputCadence = document.querySelector('.cadence input')
 const inputElevation = document.querySelector('.elevation input')
 
 
+
+
+
+class Workout {
+    date = new Date();
+    id = (Date.now() + "").slice(-10);
+
+    constructor(coords, distance, duration) {
+        this.coords = coords;
+        this.distance = distance; // in Km
+        this.duration = duration; // in min
+    }
+
+}
+
+class Running extends Workout {
+    constructor(coords, distance, duration, cadence) {
+        super(coords, distance, duration);
+        this.cadence = cadence;
+        this.calcPace();
+    }
+
+    calcPace() {
+        // min/km
+        this.pace = this.duration / this.distance;
+        return this.pace
+    }
+}
+
+class Cycling extends Workout {
+    constructor(coords, distance, duration, elevationGain) {
+        super(coords, distance, duration);
+        this.elevationGain = elevationGain;
+        this.calcSpeed();
+    }
+
+    calcSpeed() {
+        this.speed = this.distance / (this.duration / 60)
+        return this.speed
+    }
+
+
+}
+
+
+
+
+
+////////////////////////////////////////////////////
+
+// Application Architecture
 class App {
     #map;
     #mapEvent;
