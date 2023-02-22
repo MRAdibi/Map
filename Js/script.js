@@ -1,9 +1,4 @@
-
-
-
 ///////////// here is for call elements from DOM or create the variables we need
-const infoBoxes = document.querySelectorAll('.tutorial')
-const startBtn = document.querySelector('.start-map-section')
 const locations = document.querySelector('.locations')
 const locationList = document.querySelector('.location-list')
 const locationAddForm = document.querySelector('.add-location')
@@ -13,7 +8,6 @@ const inputDistance = document.querySelector('.distance input')
 const inputDuration = document.querySelector('.duration input')
 const inputCadence = document.querySelector('.cadence input')
 const inputElevation = document.querySelector('.elevation input')
-
 
 
 
@@ -70,11 +64,7 @@ class Cycling extends Workout {
         return this.speed
     }
 
-
 }
-
-
-
 
 
 ////////////////////////////////////////////////////
@@ -90,12 +80,8 @@ class App {
         addLocationForm.addEventListener('submit', this._newWorkout.bind(this))
         // handle the changing type
         typeSelect.addEventListener('change', this._toggleElevationField)
-
-        startBtn.querySelector('button').addEventListener("click", () => {
-            locations.classList.remove('hidden')
-            startBtn.classList.add("hidden")
-        })
-
+        locations.classList.remove('hidden')
+        
     }
 
     _getPosition() {
@@ -228,10 +214,4 @@ class App {
 
 }
 
-
-
 const app = new App();
-
-
-
-
