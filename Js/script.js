@@ -1,11 +1,11 @@
 
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 ///////////// here is for call elements from DOM or create the variables we need
 const infoBoxes = document.querySelectorAll('.tutorial')
 const startBtn = document.querySelector('.start-map-section')
 const locations = document.querySelector('.locations')
+const locationList = document.querySelector('.location-list')
 const locationAddForm = document.querySelector('.add-location')
 const addLocationForm = document.querySelector('form')
 const typeSelect = document.querySelector('.type')
@@ -28,6 +28,14 @@ class Workout {
         this.duration = duration; // in min
     }
 
+
+    _setTitle() {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        this.title = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
+
+    }
+
 }
 
 class Running extends Workout {
@@ -37,6 +45,7 @@ class Running extends Workout {
         super(coords, distance, duration);
         this.cadence = cadence;
         this.calcPace();
+        this._setTitle()
     }
 
     calcPace() {
@@ -53,6 +62,7 @@ class Cycling extends Workout {
         super(coords, distance, duration);
         this.elevationGain = elevationGain;
         this.calcSpeed();
+        this._setTitle()
     }
 
     calcSpeed() {
@@ -117,6 +127,12 @@ class App {
         inputDistance.focus();
     }
 
+    _hideForm() {
+        // make inputs empty
+        inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = "";
+        locationAddForm.classList.add('add-location-hidden');
+    }
+
     _toggleElevationField() {
         inputCadence.closest('.cadence').classList.toggle("hidden")
         inputElevation.closest('.elevation').classList.toggle("hidden")
@@ -158,16 +174,16 @@ class App {
 
 
         // Render workout on map as marker
-        this.renderWorkoutMarker(workout)
+        this._renderWorkoutMarker(workout)
         // Render workout on list 
-
+        this._renderWorkout(workout);
 
         // Hide form + clear input fields 
-        inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = "";
+        this._hideForm()
 
     }
 
-    renderWorkoutMarker(workout) {
+    _renderWorkoutMarker(workout) {
         // Display the marker
         L.marker(workout.coords)
             .addTo(this.#map)
@@ -177,8 +193,37 @@ class App {
                 autoClose: false,
                 closeOnClick: false,
                 className: `${workout.type}-popup`,
-            }).setContent("Hello world"))
+            }).setContent(`${workout.type === "running" ? "🏃" : "🚴"} ${workout.title}`))
             .openPopup();
+    }
+
+
+    _renderWorkout(workout) {
+
+        let html = `
+        <div class="d-flex flex-column location-list-content ${workout.type}-color text-center" data-id="${workout.id}">
+            <div class="d-flex justify-content-around">
+                <img src="Img/${workout.type === "running" ? "Run" : "Bike"}.png" alt="">
+                <div class="d-flex flex-column mx-3">
+                    <h4 class="text-start text-dark fw-semibold">${workout.title}</h3>
+                    <div class="d-flex justify-content-around mt-2 workout-data">
+                        <p>${workout.type === "running" ? "🏃" : "🚴"} ${workout.distance} KM</p>
+                        <p>⌛ ${workout.duration} MIN</p>
+                        ${workout.type === "running" ? `
+                        <p>⚡ ${workout.pace.toFixed(1)} MIN/KM</p>
+                        <p>🦶 ${workout.cadence} SPM</p>
+                        ` : ""}
+                        ${workout.type === "cycling" ? `
+                        <p>⚡ ${workout.speed.toFixed(1)} KM/H</p>
+                        <p>🦶 ${workout.elevationGain} M</p>
+                        ` : ""}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+        locationList.insertAdjacentHTML("beforeend", html)
     }
 
 }

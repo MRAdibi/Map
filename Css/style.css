@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 
@@ -69,12 +70,11 @@ p {
     border-radius: 50%;
 }
 
-
-.run-color {
+.running-color {
     background-color: #d1ccc0;
 }
 
-.bike-color {
+.cycling-color {
     background-color: #CAD3C8;
 }
 
