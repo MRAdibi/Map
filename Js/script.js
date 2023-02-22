@@ -1,6 +1,6 @@
 ///////////// here is for call elements from DOM or create the variables we need
 const locations = document.querySelector('.locations')
-const locationList = document.querySelector('.location-list')
+const workoutList = document.querySelector('.workouts')
 const locationAddForm = document.querySelector('.add-location')
 const addLocationForm = document.querySelector('form')
 const typeSelect = document.querySelector('.type')
@@ -72,6 +72,7 @@ class Cycling extends Workout {
 // Application Architecture
 class App {
     #map;
+    #mapZoomLevel = 17;
     #mapEvent;
     #workouts = [];
     constructor() {
@@ -81,7 +82,8 @@ class App {
         // handle the changing type
         typeSelect.addEventListener('change', this._toggleElevationField)
         locations.classList.remove('hidden')
-        
+        workoutList.addEventListener('click', this._moveToPopup.bind(this))
+
     }
 
     _getPosition() {
@@ -99,7 +101,7 @@ class App {
         const longitude = position.coords.longitude;
         const cords = [latitude, longitude]
 
-        this.#map = L.map('map').setView(cords, 17);
+        this.#map = L.map('map').setView(cords, this.#mapZoomLevel);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.#map);
@@ -209,7 +211,28 @@ class App {
             </div>
         </div>
         `
-        locationList.insertAdjacentHTML("beforeend", html)
+        workoutList.insertAdjacentHTML("afterbegin", html)
+    }
+
+    _moveToPopup(e) {
+        const workoutEl = e.target.closest('.location-list-content')
+        console.log(workoutEl)
+
+        if (!workoutEl) return;
+
+        const workout = this.#workouts.find(
+            work => work.id === workoutEl.dataset.id
+        );
+
+        console.log(workout)
+
+        this.#map.setView(workout.coords, this.#mapZoomLevel, {
+            animate: true,
+            pan: {
+                duration: 1,
+            },
+        })
+
     }
 
 }
