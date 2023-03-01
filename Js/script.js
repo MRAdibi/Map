@@ -8,6 +8,7 @@ const inputDistance = document.querySelector('.distance input')
 const inputDuration = document.querySelector('.duration input')
 const inputCadence = document.querySelector('.cadence input')
 const inputElevation = document.querySelector('.elevation input')
+const restartBtn = document.querySelector(".reset")
 
 
 
@@ -90,6 +91,7 @@ class App {
         typeSelect.addEventListener('change', this._toggleElevationField)
         locations.classList.remove('hidden')
         workoutList.addEventListener('click', this._moveToPopup.bind(this))
+        restartBtn.addEventListener('click', this.reset)
 
     }
 
@@ -229,7 +231,6 @@ class App {
 
     _moveToPopup(e) {
         const workoutEl = e.target.closest('.location-list-content')
-        console.log(workoutEl)
 
         if (!workoutEl) return;
 
@@ -254,7 +255,6 @@ class App {
 
     _getLocalStorage() {
         const data = JSON.parse(localStorage.getItem("workouts"));
-        console.log(data)
         
         // handle the error
         if (!data) return;
@@ -263,6 +263,11 @@ class App {
         this.#workouts.forEach(work => {
             this._renderWorkout(work);
         })
+    }
+
+    reset() {
+        localStorage.removeItem("workouts");
+        location.reload();
     }
 
 }

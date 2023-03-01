@@ -137,6 +137,23 @@ p {
 }
 
 
+/* reset button */
+.reset {
+    z-index: 1;
+    background-color: #2d3436;
+    padding: 20px;
+    border-radius: 50%;
+    position: absolute;
+    right: 3%;
+    bottom: 7%;
+    cursor: pointer;
+}
+
+.reset img {
+    width: 40px;
+    height: auto;
+}
+
 
 /* Popup width is defined in JS using options */
 .leaflet-popup .leaflet-popup-content-wrapper {
